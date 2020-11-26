@@ -1,7 +1,6 @@
 package binary
 
 import (
-	bin "encoding/binary"
 	"io"
 	"math"
 )
@@ -39,17 +38,17 @@ func ReadUint8(r io.Reader) (uint8, error) {
 
 func ReadUint16(r io.Reader) (uint16, error) {
 	b, e := ReadBytes(r, 2)
-	return bin.LittleEndian.Uint16(b), e
+	return endian.Uint16(b), e
 }
 
 func ReadUint32(r io.Reader) (uint32, error) {
 	b, e := ReadBytes(r, 4)
-	return bin.LittleEndian.Uint32(b), e
+	return endian.Uint32(b), e
 }
 
 func ReadUint64(r io.Reader) (uint64, error) {
 	b, e := ReadBytes(r, 8)
-	return bin.LittleEndian.Uint64(b), e
+	return endian.Uint64(b), e
 }
 
 func ReadInt8(r io.Reader) (int8, error) {
@@ -59,27 +58,27 @@ func ReadInt8(r io.Reader) (int8, error) {
 
 func ReadInt16(r io.Reader) (int16, error) {
 	b, e := ReadBytes(r, 2)
-	return int16(bin.LittleEndian.Uint16(b)), e
+	return int16(endian.Uint16(b)), e
 }
 
 func ReadInt32(r io.Reader) (int32, error) {
 	b, e := ReadBytes(r, 4)
-	return int32(bin.LittleEndian.Uint32(b)), e
+	return int32(endian.Uint32(b)), e
 }
 
 func ReadInt64(r io.Reader) (int64, error) {
 	b, e := ReadBytes(r, 8)
-	return int64(bin.LittleEndian.Uint64(b)), e
+	return int64(endian.Uint64(b)), e
 }
 
 func ReadFloat32(r io.Reader) (float32, error) {
 	b, e := ReadBytes(r, 4)
-	return math.Float32frombits(bin.LittleEndian.Uint32(b)), e
+	return math.Float32frombits(endian.Uint32(b)), e
 }
 
 func ReadFloat64(r io.Reader) (float64, error) {
 	b, e := ReadBytes(r, 8)
-	return math.Float64frombits(bin.LittleEndian.Uint64(b)), e
+	return math.Float64frombits(endian.Uint64(b)), e
 }
 
 func ReadUint8s(r io.Reader, n int) ([]uint8, error) {

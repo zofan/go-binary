@@ -22,6 +22,8 @@ const (
 
 var (
 	ErrInvalidBytes = errors.New(`binary: invalid bytes`)
+
+	endian = bin.LittleEndian
 )
 
 func WriteBytes(w io.Writer, b []byte) (e error) {
@@ -54,19 +56,19 @@ func WriteUint8(w io.Writer, v uint8) (e error) {
 
 func WriteUint16(w io.Writer, v uint16) (e error) {
 	b := make([]byte, 2)
-	bin.LittleEndian.PutUint16(b, v)
+	endian.PutUint16(b, v)
 	return WriteBytes(w, b)
 }
 
 func WriteUint32(w io.Writer, v uint32) (e error) {
 	b := make([]byte, 4)
-	bin.LittleEndian.PutUint32(b, v)
+	endian.PutUint32(b, v)
 	return WriteBytes(w, b)
 }
 
 func WriteUint64(w io.Writer, v uint64) (e error) {
 	b := make([]byte, 8)
-	bin.LittleEndian.PutUint64(b, v)
+	endian.PutUint64(b, v)
 	return WriteBytes(w, b)
 }
 
@@ -101,7 +103,7 @@ func WriteUint8s(w io.Writer, vs []uint8) (e error) {
 func WriteUint16s(w io.Writer, vs []uint16) (e error) {
 	b := make([]byte, len(vs)*2)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint16(b[i*2:], v)
+		endian.PutUint16(b[i*2:], v)
 	}
 	return WriteBytes(w, b)
 }
@@ -109,7 +111,7 @@ func WriteUint16s(w io.Writer, vs []uint16) (e error) {
 func WriteUint32s(w io.Writer, vs []uint32) (e error) {
 	b := make([]byte, len(vs)*4)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint32(b[i*4:], v)
+		endian.PutUint32(b[i*4:], v)
 	}
 	return WriteBytes(w, b)
 }
@@ -117,7 +119,7 @@ func WriteUint32s(w io.Writer, vs []uint32) (e error) {
 func WriteUint64s(w io.Writer, vs []uint64) (e error) {
 	b := make([]byte, len(vs)*8)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint64(b[i*8:], v)
+		endian.PutUint64(b[i*8:], v)
 	}
 	return WriteBytes(w, b)
 }
@@ -133,7 +135,7 @@ func WriteInt8s(w io.Writer, vs []int8) (e error) {
 func WriteInt16s(w io.Writer, vs []int16) (e error) {
 	b := make([]byte, len(vs)*2)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint16(b[i*2:], uint16(v))
+		endian.PutUint16(b[i*2:], uint16(v))
 	}
 	return WriteBytes(w, b)
 }
@@ -141,7 +143,7 @@ func WriteInt16s(w io.Writer, vs []int16) (e error) {
 func WriteInt32s(w io.Writer, vs []int32) (e error) {
 	b := make([]byte, len(vs)*4)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint32(b[i*4:], uint32(v))
+		endian.PutUint32(b[i*4:], uint32(v))
 	}
 	return WriteBytes(w, b)
 }
@@ -149,7 +151,7 @@ func WriteInt32s(w io.Writer, vs []int32) (e error) {
 func WriteInt64s(w io.Writer, vs []int64) (e error) {
 	b := make([]byte, len(vs)*8)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint64(b[i*8:], uint64(v))
+		endian.PutUint64(b[i*8:], uint64(v))
 	}
 	return WriteBytes(w, b)
 }
@@ -157,7 +159,7 @@ func WriteInt64s(w io.Writer, vs []int64) (e error) {
 func WriteFloat32s(w io.Writer, vs []float32) (e error) {
 	b := make([]byte, len(vs)*4)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint32(b[i*4:], math.Float32bits(v))
+		endian.PutUint32(b[i*4:], math.Float32bits(v))
 	}
 	return WriteBytes(w, b)
 }
@@ -165,7 +167,7 @@ func WriteFloat32s(w io.Writer, vs []float32) (e error) {
 func WriteFloat64s(w io.Writer, vs []float64) (e error) {
 	b := make([]byte, len(vs)*8)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint64(b[i*8:], math.Float64bits(v))
+		endian.PutUint64(b[i*8:], math.Float64bits(v))
 	}
 	return WriteBytes(w, b)
 }
@@ -173,7 +175,7 @@ func WriteFloat64s(w io.Writer, vs []float64) (e error) {
 func WriteRunes(w io.Writer, vs []rune) (e error) {
 	b := make([]byte, len(vs)*4)
 	for i, v := range vs {
-		bin.LittleEndian.PutUint32(b[i*4:], uint32(v))
+		endian.PutUint32(b[i*4:], uint32(v))
 	}
 	return WriteBytes(w, b)
 }
